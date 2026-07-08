@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>٥ شهور مع نورا 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#ff4f9a;
+    --pink-deep:#e63887;
+    --pink-soft:#ff85c1;
+    --pink-pale:#ffe3f0;
+    --white:#ffffff;
+    --ink:#6b1f47;
+    --glass:rgba(255,255,255,0.65);
+    --glass-border:rgba(255,79,154,0.35);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+
+  html,body{ height:100%; }
+
+  body{
+    background:
+      radial-gradient(circle at 15% 10%, rgba(255,133,193,0.35), transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(255,79,154,0.25), transparent 45%),
+      linear-gradient(160deg, #fff5fa 0%, #ffe9f3 45%, #ffdcee 100%);
+    color:var(--ink);
+    font-family:'Cairo','Tajawal',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    /* soft studio backdrop behind the phone frame on wide screens */
+    background-color:#f3d8e6;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  /* ---------- Phone-sized frame ---------- */
+  #app{
+    position:relative;
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+    margin:0 auto;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255,133,193,0.28), transparent 42%),
+      radial-gradient(circle at 85% 80%, rgba(255,79,154,0.2), transparent 48%),
+      linear-gradient(160deg, #fffafc 0%, #ffeef6 50%, #ffe0ef 100%);
+    box-shadow:0 0 0 1px rgba(255,79,154,0.08);
+  }
+
+  @media (min-width:431px){
+    body{ padding:28px 0; }
+    #app{
+      min-height:844px;
+      max-height:900px;
+      border-radius:38px;
+      box-shadow:0 25px 70px rgba(180,30,90,0.35), 0 0 0 10px #1a1a1a, 0 0 0 12px rgba(255,133,193,0.4);
+    }
+  }
+
+  /* ---------- Background ambience ---------- */
+  .particle-layer{
+    position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
+  }
+
+  .heart, .spark{
+    position:absolute;
+    bottom:-8%;
+    opacity:0;
+    will-change:transform, opacity;
+  }
+
+  .heart{ font-size:16px; animation:floatUp linear infinite; filter:drop-shadow(0 2px 6px rgba(255,79,154,0.35)); }
+  .spark{
+    width:5px; height:5px; border-radius:50%;
+    background:radial-gradient(circle, #fff 0%, var(--pink-soft) 70%);
+    box-shadow:0 0 8px 2px rgba(255,133,193,0.8);
+    animation:floatUp linear infinite, twinkle 1.6s ease-in-out infinite;
+  }
+
+  @keyframes floatUp{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    8%{ opacity:0.95; }
+    92%{ opacity:0.8; }
+    100%{ transform:translateY(-108%) translateX(var(--drift,20px)) rotate(360deg); opacity:0; }
+  }
+  @keyframes twinkle{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.6); } }
+
+  .flash-overlay{
+    position:absolute; inset:0; z-index:15;
+    background:radial-gradient(circle, #ffffff 0%, var(--pink-soft) 60%, var(--pink) 100%);
+    opacity:0;
+    pointer-events:none;
+  }
+  .flash-overlay.fire{
+    animation:flashFire 0.7s ease-out;
+  }
+  @keyframes flashFire{
+    0%{ opacity:0; }
+    12%{ opacity:0.9; }
+    100%{ opacity:0; }
+  }
+
+  /* ---------- Screens ---------- */
+  .screen{
+    position:relative; z-index:2;
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:32px 22px;
+    text-align:center;
+    transition:opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+  }
+
+  #app.phone-fixed .screen{ min-height:100%; }
+
+  .screen.hidden{
+    opacity:0;
+    transform:scale(0.97);
+    pointer-events:none;
+    position:absolute; inset:0;
+  }
+
+  .screen.darken{ filter:brightness(1.4) saturate(0.3); }
+
+  /* ---------- Intro ---------- */
+  .heart-badge{
+    font-size:2.4rem;
+    margin-bottom:10px;
+    animation:heartBeat 1.8s ease-in-out infinite, dropIn 0.9s ease;
+    filter:drop-shadow(0 6px 14px rgba(255,79,154,0.45));
+  }
+
+  @keyframes dropIn{
+    from{ opacity:0; transform:translateY(-30px) scale(0.7); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  .glow-title{
+    font-weight:900;
+    font-size:clamp(2.3rem, 11vw, 3.4rem);
+    letter-spacing:1px;
+    background:linear-gradient(100deg, var(--pink-deep) 0%, var(--pink) 30%, var(--pink-soft) 55%, var(--pink) 80%, var(--pink-deep) 100%);
+    background-size:250% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:shimmer 4s linear infinite, dropIn 0.9s ease;
+  }
+
+  @keyframes shimmer{
+    0%{ background-position:0% 50%; }
+    100%{ background-position:250% 50%; }
+  }
+
+  .subtitle{
+    margin-top:16px;
+    font-size:clamp(0.98rem, 4vw, 1.15rem);
+    color:#a3486f;
+    font-weight:500;
+    max-width:340px;
+    line-height:1.9;
+    opacity:0;
+    animation:fadeUp 0.9s ease 0.35s forwards;
+  }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .btn{
+    margin-top:40px;
+    background:linear-gradient(135deg, var(--pink), var(--pink-soft));
+    background-size:180% 180%;
+    border:none;
+    color:#fff;
+    font-family:inherit;
+    font-weight:700;
+    font-size:1.02rem;
+    padding:15px 40px;
+    border-radius:50px;
+    cursor:pointer;
+    box-shadow:0 10px 26px rgba(255,79,154,0.45), 0 0 0 rgba(255,79,154,0.5);
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+    letter-spacing:0.5px;
+    opacity:0;
+    animation:fadeUp 0.9s ease 0.6s forwards, glowPulse 2.6s ease-in-out 1.5s infinite;
+  }
+  @keyframes glowPulse{
+    0%,100%{ box-shadow:0 10px 26px rgba(255,79,154,0.4); }
+    50%{ box-shadow:0 10px 34px rgba(255,79,154,0.65); }
+  }
+  .btn:hover{ transform:translateY(-3px) scale(1.03); }
+  .btn:active{ transform:translateY(0) scale(0.97); }
+  .btn:disabled{ opacity:0.4; cursor:not-allowed; }
+
+  .btn.ghost{
+    background:#fff;
+    color:var(--pink-deep);
+    border:1.5px solid var(--glass-border);
+    box-shadow:0 6px 18px rgba(255,79,154,0.2);
+    animation:none;
+    opacity:1;
+  }
+
+  /* ---------- Doors screen ---------- */
+  .doors-header{
+    font-size:clamp(1.05rem, 4.5vw, 1.35rem);
+    font-weight:800;
+    color:var(--pink-deep);
+    margin-bottom:6px;
+    opacity:0;
+    animation:fadeUp 0.7s ease forwards;
+  }
+  .doors-sub{
+    font-size:0.88rem;
+    color:#c07aa0;
+    margin-bottom:34px;
+    font-weight:500;
+    opacity:0;
+    animation:fadeUp 0.7s ease 0.15s forwards;
+  }
+
+  .doors-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:18px;
+    max-width:320px;
+    width:100%;
+  }
+  .doors-grid .door:nth-child(5){
+    grid-column:1 / span 2;
+    justify-self:center;
+    width:calc(50% - 9px);
+  }
+
+  .door{
+    position:relative;
+    aspect-ratio:3/4.1;
+    border-radius:18px 18px 9px 9px;
+    background:linear-gradient(160deg, #ffffff, var(--pink-pale));
+    border:1.5px solid var(--glass-border);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    cursor:pointer;
+    box-shadow:0 10px 22px rgba(255,79,154,0.18), inset 0 0 0 rgba(255,255,255,0);
+    transition:transform 0.3s cubic-bezier(.2,.9,.3,1.4), box-shadow 0.3s ease, filter 0.3s ease;
+    overflow:hidden;
+    opacity:0;
+    animation:doorPopIn 0.6s cubic-bezier(.2,.9,.3,1.4) forwards;
+  }
+  .door:nth-child(1){ animation-delay:0.25s; }
+  .door:nth-child(2){ animation-delay:0.35s; }
+  .door:nth-child(3){ animation-delay:0.45s; }
+  .door:nth-child(4){ animation-delay:0.55s; }
+  .door:nth-child(5){ animation-delay:0.65s; }
+
+  @keyframes doorPopIn{
+    from{ opacity:0; transform:translateY(22px) scale(0.85); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  .door::before{
+    content:"";
+    position:absolute; inset:6px;
+    border:1px solid rgba(255,79,154,0.25);
+    border-radius:14px 14px 7px 7px;
+    pointer-events:none;
+  }
+  .door .num{
+    font-size:1.9rem;
+    font-weight:800;
+    color:var(--pink-deep);
+    font-family:'Tajawal',sans-serif;
+  }
+  .door .icon{ font-size:1.4rem; margin-bottom:2px; }
+  .door .door-label{
+    font-family:'Tajawal',sans-serif;
+    font-size:0.62rem;
+    font-weight:700;
+    letter-spacing:2px;
+    color:var(--pink-soft);
+    margin-bottom:2px;
+  }
+  .door.locked .door-label{ opacity:0.45; }
+
+  .door.locked{
+    filter:grayscale(0.4) brightness(1.02);
+    background:linear-gradient(160deg, #f7f0f4, #f1e4ec);
+    box-shadow:0 4px 10px rgba(255,79,154,0.08);
+    cursor:not-allowed;
+  }
+  .door.locked .num, .door.locked .icon{ opacity:0.45; }
+
+  .door.unlocked-ready{
+    animation-name:doorPopIn, doorPulse;
+    animation-duration:0.6s, 2.1s;
+    animation-delay:inherit, 0.9s;
+    animation-iteration-count:1, infinite;
+    animation-timing-function:cubic-bezier(.2,.9,.3,1.4), ease-in-out;
+  }
+  @keyframes doorPulse{
+    0%,100%{ box-shadow:0 10px 22px rgba(255,79,154,0.2); transform:translateY(0) scale(1); }
+    50%{ box-shadow:0 14px 34px rgba(255,79,154,0.4); transform:translateY(-3px) scale(1.02); }
+  }
+
+  .door.opened{
+    background:linear-gradient(160deg, #fff, #ffe9f3);
+    box-shadow:0 4px 12px rgba(255,79,154,0.15);
+  }
+  .door.opened .num{ opacity:0.7; }
+  .door.opened .icon{ opacity:0.7; }
+
+  .door:not(.locked):hover{ transform:translateY(-5px) rotate(-1deg); }
+  .door:not(.locked):active{ transform:translateY(-1px) scale(0.97); }
+
+  /* ---------- Door reveal overlay ---------- */
+  .reveal-overlay{
+    position:absolute; inset:0; z-index:20;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,236,246,0.88);
+    backdrop-filter:blur(6px);
+    opacity:0; pointer-events:none;
+    transition:opacity 0.45s ease;
+    padding:24px;
+  }
+  .reveal-overlay.show{ opacity:1; pointer-events:auto; }
+
+  .reveal-card{
+    background:#fff;
+    border:1.5px solid var(--glass-border);
+    border-radius:24px;
+    padding:38px 26px;
+    max-width:320px;
+    width:100%;
+    text-align:center;
+    box-shadow:0 20px 50px rgba(255,79,154,0.3);
+    transform:scale(0.85) translateY(10px);
+    transition:transform 0.5s cubic-bezier(.2,.9,.3,1.3);
+  }
+  .reveal-overlay.show .reveal-card{ transform:scale(1) translateY(0); }
+
+  .reveal-text{
+    font-size:clamp(1.1rem, 5vw, 1.4rem);
+    font-weight:700;
+    line-height:1.9;
+    color:var(--pink-deep);
+  }
+
+  .reveal-close{ margin-top:28px; }
+
+  /* ---------- Final screen ---------- */
+  #final-screen{ padding-top:56px; padding-bottom:56px; }
+
+  .final-card{
+    background:rgba(255,255,255,0.85);
+    border:1.5px solid var(--glass-border);
+    border-radius:26px;
+    padding:30px 20px;
+    max-width:380px;
+    width:100%;
+    max-height:64vh;
+    overflow-y:auto;
+    box-shadow:0 20px 55px rgba(255,79,154,0.28);
+    text-align:right;
+    scrollbar-width:thin;
+    scrollbar-color:var(--pink) transparent;
+    opacity:0;
+    animation:cardIn 1s ease forwards;
+  }
+  @keyframes cardIn{
+    from{ opacity:0; transform:scale(0.9) translateY(20px); }
+    to{ opacity:1; transform:scale(1) translateY(0); }
+  }
+  .final-card::-webkit-scrollbar{ width:5px; }
+  .final-card::-webkit-scrollbar-thumb{ background:var(--pink-soft); border-radius:10px; }
+
+  .final-heading{
+    text-align:center;
+    font-size:1.2rem;
+    font-weight:800;
+    color:var(--pink-deep);
+    margin-bottom:20px;
+  }
+
+  .final-text p{
+    font-size:0.97rem;
+    line-height:2.05;
+    color:#5c2440;
+    margin-bottom:20px;
+    font-weight:400;
+    opacity:0;
+    animation:lineIn 0.7s ease forwards;
+  }
+
+  @keyframes lineIn{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .caret{
+    display:inline-block;
+    width:2px;
+    height:1em;
+    background:var(--pink);
+    margin-right:2px;
+    vertical-align:middle;
+    animation:blink 0.9s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .after-message{
+    margin-top:34px;
+    text-align:center;
+    opacity:0;
+    transition:opacity 1.1s ease, transform 1.1s ease;
+    transform:translateY(10px);
+  }
+  .after-message.show{ opacity:1; transform:translateY(0); }
+
+  .big-heart{
+    font-size:2.8rem;
+    animation:heartBeat 1.8s ease-in-out infinite;
+    filter:drop-shadow(0 8px 18px rgba(255,79,154,0.5));
+  }
+  @keyframes heartBeat{
+    0%,100%{ transform:scale(1); }
+    15%{ transform:scale(1.18); }
+    30%{ transform:scale(1); }
+    45%{ transform:scale(1.12); }
+    60%{ transform:scale(1); }
+  }
+
+  .signature{
+    margin-top:10px;
+    font-size:0.92rem;
+    letter-spacing:0.5px;
+    color:#c07aa0;
+    font-family:'Tajawal',sans-serif;
+  }
+
+  .surprise-btn{
+    margin-top:24px;
+    display:inline-block;
+  }
+  .surprise-btn.used{
+    opacity:0;
+    transform:scale(0.7);
+    pointer-events:none;
+  }
+
+  /* ---------- Surprise screen: big cinematic celebration ---------- */
+  #surprise-screen{
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255,133,193,0.55), transparent 55%),
+      radial-gradient(circle at 80% 30%, rgba(255,79,154,0.5), transparent 55%),
+      radial-gradient(circle at 50% 90%, rgba(255,180,215,0.6), transparent 55%),
+      linear-gradient(160deg, #fff0f7 0%, #ffd7ec 50%, #ffc2e3 100%);
+    background-size:200% 200%;
+    animation:surpriseBgShift 6s ease-in-out infinite;
+    overflow:hidden;
+  }
+  @keyframes surpriseBgShift{
+    0%,100%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+  }
+
+  .surprise-hearts-rain{
+    position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
+  }
+  .rain-heart{
+    position:absolute;
+    top:-10%;
+    opacity:0;
+    animation:rainFall linear infinite;
+    filter:drop-shadow(0 4px 10px rgba(255,79,154,0.4));
+  }
+  @keyframes rainFall{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg) scale(0.8); opacity:0; }
+    10%{ opacity:1; }
+    90%{ opacity:0.9; }
+    100%{ transform:translateY(120vh) translateX(var(--rdrift,0px)) rotate(360deg) scale(1.1); opacity:0; }
+  }
+
+  .surprise-badge{
+    position:relative; z-index:2;
+    font-size:2.4rem;
+    letter-spacing:10px;
+    animation:badgePop 0.7s cubic-bezier(.2,.9,.3,1.4), heartBeat 1.1s ease-in-out 0.7s infinite;
+    filter:drop-shadow(0 8px 20px rgba(255,79,154,0.5));
+  }
+  @keyframes badgePop{
+    0%{ opacity:0; transform:scale(0.3) rotate(-15deg); }
+    60%{ opacity:1; transform:scale(1.25) rotate(6deg); }
+    100%{ opacity:1; transform:scale(1) rotate(0deg); }
+  }
+
+  .surprise-big-text{
+    position:relative; z-index:2;
+    margin-top:24px;
+    max-width:340px;
+    padding:28px 24px;
+    background:rgba(255,255,255,0.75);
+    border:2px solid var(--glass-border);
+    border-radius:26px;
+    font-size:clamp(1.15rem, 5.5vw, 1.45rem);
+    font-weight:800;
+    line-height:2.1;
+    color:var(--pink-deep);
+    box-shadow:0 22px 55px rgba(255,79,154,0.4);
+    opacity:0;
+    animation:surpriseTextIn 0.8s cubic-bezier(.2,.9,.3,1.4) 0.35s forwards, glowPulse 2.4s ease-in-out 1.2s infinite;
+  }
+  @keyframes surpriseTextIn{
+    0%{ opacity:0; transform:translateY(30px) scale(0.85); }
+    100%{ opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  #surprise-back-btn{
+    position:relative; z-index:2;
+    margin-top:34px;
+    opacity:0;
+    animation:fadeUp 0.7s ease 1s forwards;
+  }
+
+  button:focus-visible, .door:focus-visible{
+    outline:2px solid var(--pink-deep);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="particle-layer" id="particle-layer"></div>
+  <div class="flash-overlay" id="flash-overlay"></div>
+
+  <!-- INTRO SCREEN -->
+  <section class="screen" id="intro-screen">
+    <div class="heart-badge">💗</div>
+    <h1 class="glow-title">٥ شهور 💗</h1>
+    <p class="subtitle">خمس أبواب صغيرة... وكل باب فيه جزء من الحكاية.</p>
+    <button class="btn" id="start-btn">ابدئي ✨</button>
+  </section>
+
+  <!-- DOORS SCREEN -->
+  <section class="screen hidden" id="doors-screen">
+    <div class="doors-header">افتحي الأبواب بالترتيب ✨</div>
+    <div class="doors-sub">باب واحد كل مرة... بالترتيب</div>
+    <div class="doors-grid" id="doors-grid">
+      <div class="door locked" data-index="0" role="button" tabindex="0" aria-label="Door 1">
+        <div class="icon">🚪</div>
+        <div class="door-label">DOOR</div>
+        <div class="num">1</div>
+      </div>
+      <div class="door locked" data-index="1" role="button" tabindex="0" aria-label="Door 2">
+        <div class="icon">🚪</div>
+        <div class="door-label">DOOR</div>
+        <div class="num">2</div>
+      </div>
+      <div class="door locked" data-index="2" role="button" tabindex="0" aria-label="Door 3">
+        <div class="icon">🚪</div>
+        <div class="door-label">DOOR</div>
+        <div class="num">3</div>
+      </div>
+      <div class="door locked" data-index="3" role="button" tabindex="0" aria-label="Door 4">
+        <div class="icon">🚪</div>
+        <div class="door-label">DOOR</div>
+        <div class="num">4</div>
+      </div>
+      <div class="door locked" data-index="4" role="button" tabindex="0" aria-label="Door 5">
+        <div class="icon">🚪</div>
+        <div class="door-label">DOOR</div>
+        <div class="num">5</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOOR REVEAL OVERLAY -->
+  <div class="reveal-overlay" id="reveal-overlay">
+    <div class="reveal-card">
+      <div class="reveal-text" id="reveal-text"></div>
+      <button class="btn ghost reveal-close" id="reveal-close">تمام 💗</button>
+    </div>
+  </div>
+
+  <!-- FINAL SCREEN -->
+  <section class="screen hidden" id="final-screen">
+    <div class="final-card" id="final-card">
+      <div class="final-heading">💌 الرسالة الأخيرة</div>
+      <div class="final-text" id="final-text"></div>
+    </div>
+    <div class="after-message" id="after-message">
+      <div class="big-heart">💗</div>
+      <div class="signature">Made with 💗 only for Nora</div>
+
+      <button class="btn surprise-btn" id="surprise-btn">دوسي هنا 💗</button>
+
+      <button class="btn ghost" id="restart-btn" style="margin-top:26px;">ابدئي من جديد ✨</button>
+    </div>
+  </section>
+
+  <!-- SURPRISE SCREEN -->
+  <section class="screen hidden" id="surprise-screen">
+    <div class="surprise-hearts-rain" id="surprise-hearts-rain"></div>
+    <div class="surprise-badge">💗💗💗</div>
+    <p class="surprise-big-text">ده شيء لا يذكر ليكي يا حياتي، وتستاهلي أكتر من كدا بكتير يا عمري 💗💗</p>
+    <button class="btn ghost" id="surprise-back-btn">رجوع 💗</button>
+  </section>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- Ambient particles (hearts + sparkles) ---------------- */
+  const particleLayer = document.getElementById('particle-layer');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pinkTones = ['#ff4f9a','#ff85c1','#e63887','#ffb3d9'];
+
+  function spawnParticle(kind){
+    const el = document.createElement('div');
+    el.className = kind;
+    const left = Math.random()*100;
+    const duration = 8 + Math.random()*9;
+    const drift = (Math.random()*70 - 35) + 'px';
+    const delay = Math.random()*3;
+    const size = kind==='heart' ? (13 + Math.random()*14) : (3 + Math.random()*4);
+    el.style.left = left + '%';
+    el.style.setProperty('--drift', drift);
+    el.style.animationDuration = duration + 's';
+    el.style.animationDelay = delay + 's';
+    if(kind==='heart'){
+      el.style.fontSize = size + 'px';
+      el.textContent = Math.random() > 0.5 ? '💗' : '💗';
+      el.style.color = pinkTones[Math.floor(Math.random()*pinkTones.length)];
+    } else {
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+    }
+    particleLayer.appendChild(el
