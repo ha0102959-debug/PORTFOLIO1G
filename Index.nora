@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>To The Moon... And Back 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blush-1:#fff0f5;
+    --blush-2:#ffd6e8;
+    --pink-1:#ffb6d5;
+    --pink-2:#ff8fc0;
+    --pink-deep:#ff5fa8;
+    --white-glass: rgba(255,255,255,0.45);
+    --white-glass-strong: rgba(255,255,255,0.65);
+    --ink:#7a3b57;
+    --ink-soft:#a8607e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;overflow-x:hidden;}
+  body{
+    font-family:'Poppins', sans-serif;
+    background: linear-gradient(160deg, var(--blush-1) 0%, var(--blush-2) 45%, var(--pink-1) 100%);
+    background-attachment:fixed;
+    color:var(--ink);
+    min-height:100vh;
+    position:relative;
+    -webkit-font-smoothing:antialiased;
+  }
+  #ambient-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+  .glow-orb{position:fixed;border-radius:50%;filter:blur(60px);opacity:0.55;pointer-events:none;z-index:0;animation: driftOrb 18s ease-in-out infinite;}
+  .glow-orb.a{ width:380px;height:380px; background:radial-gradient(circle, var(--pink-2), transparent 70%); top:-100px; left:-100px; animation-duration:22s;}
+  .glow-orb.b{ width:320px;height:320px; background:radial-gradient(circle, var(--pink-1), transparent 70%); bottom:-80px; right:-80px; animation-duration:26s; animation-delay:2s;}
+  .glow-orb.c{ width:260px;height:260px; background:radial-gradient(circle, #ffc4de, transparent 70%); top:40%; right:10%; animation-duration:20s; animation-delay:4s;}
+  @keyframes driftOrb{0%,100%{ transform: translate(0,0) scale(1); }50%{ transform: translate(30px,-40px) scale(1.08); }}
+  .screen{position:relative;z-index:2;min-height:100vh;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding: 40px 20px;}
+  .hidden-screen{display:none;}
+  .hero-heart-wrap{position:relative;width:150px;height:150px;margin-bottom: 18px;display:flex;align-items:center;justify-content:center;}
+  .hero-heart{font-size: 90px;filter: drop-shadow(0 0 25px rgba(255,95,168,0.75)) drop-shadow(0 0 55px rgba(255,182,213,0.6));animation: heartFloat 3.2s ease-in-out infinite, heartPulse 2.1s ease-in-out infinite;z-index:2;}
+  .hero-heart-ring{position:absolute;inset:0;border-radius:50%;border: 1px solid rgba(255,143,192,0.5);animation: ringPulse 2.6s ease-out infinite;}
+  .hero-heart-ring.delay{animation-delay:1.3s;}
+  @keyframes ringPulse{0%{ transform:scale(0.6); opacity:0.8;}100%{ transform:scale(1.9); opacity:0;}}
+  @keyframes heartFloat{0%,100%{ transform: translateY(0px); }50%{ transform: translateY(-14px); }}
+  @keyframes heartPulse{0%,100%{ transform: scale(1); }50%{ transform: scale(1.08); }}
+  h1.title{font-weight:700;font-size: clamp(1.9rem, 6vw, 3.2rem);letter-spacing: 0.5px;background: linear-gradient(90deg, #ff6fb0, #ff9bcb, #ff6fb0);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow: 0 0 40px rgba(255,143,192,0.35);margin-bottom: 14px;animation: gentleFloat 5s ease-in-out infinite, shimmerText 6s linear infinite;background-size: 200% auto;}
+  @keyframes shimmerText{0%{ background-position: 0% center; }100%{ background-position: 200% center; }}
+  p.subtitle{font-weight:300;font-style:italic;font-size: clamp(1rem, 3vw, 1.25rem);color: var(--ink-soft);max-width: 480px;margin-bottom: 42px;animation: gentleFloat 5s ease-in-out infinite;animation-delay:0.3s;}
+  @keyframes gentleFloat{0%,100%{ transform: translateY(0); }50%{ transform: translateY(-8px); }}
+  .glow-btn{position:relative;border:none;outline:none;cursor:pointer;font-family:'Poppins', sans-serif;font-weight:600;font-size: 1.05rem;color:#fff;padding: 18px 42px;border-radius: 50px;background: linear-gradient(135deg, var(--pink-deep), var(--pink-2));box-shadow: 0 8px 30px rgba(255,95,168,0.45);animation: gentleFloat 4s ease-in-out infinite, btnGlow 2.4s ease-in-out infinite;transition: transform 0.35s ease, box-shadow 0.35s ease;letter-spacing:0.3px;}
+  .glow-btn:hover{transform: translateY(-4px) scale(1.04);box-shadow: 0 14px 40px rgba(255,95,168,0.6);}
+  .glow-btn:active{transform: translateY(-1px) scale(0.98);}
+  @keyframes btnGlow{0%,100%{ box-shadow: 0 8px 30px rgba(255,95,168,0.45); }50%{ box-shadow: 0 8px 46px rgba(255,95,168,0.75); }}
+  #main-screen{justify-content:flex-start;padding-top: 60px;}
+  .moon-instructions{font-size: 0.95rem;color: var(--ink-soft);font-weight:300;letter-spacing:0.3px;margin-bottom: 30px;opacity:0.85;}
+  .moon-wrap{position:relative;width: 220px;height:220px;margin: 10px auto 30px;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color: transparent;user-select:none;}
+  .moon{position:relative;width: 170px;height:170px;border-radius:50%;background: radial-gradient(circle at 35% 30%, #fff5fa 0%, #ffd3e8 35%, #ff9fcb 75%, #ff7ab8 100%);box-shadow:0 0 40px 10px rgba(255,143,192,0.55),0 0 90px 25px rgba(255,182,213,0.45),inset -10px -10px 30px rgba(255,120,180,0.35),inset 10px 10px 25px rgba(255,255,255,0.6);animation: gentleFloat 5.5s ease-in-out infinite;transition: box-shadow 0.5s ease, transform 0.25s ease;overflow:hidden;}
+  .moon::before{content:'';position:absolute;width:34px; height:34px;border-radius:50%;background: rgba(255,255,255,0.35);top:28px; left:38px;filter: blur(2px);}
+  .moon::after{content:'';position:absolute;width:20px; height:20px;border-radius:50%;background: rgba(255,150,195,0.4);bottom:36px; right:30px;filter: blur(1px);}
+  .moon-wrap:active .moon{transform: scale(0.95);}
+  .moon-glow-ring{position:absolute;inset:-20px;border-radius:50%;border: 1px solid rgba(255,143,192,0.35);animation: ringPulse 3s ease-out infinite;pointer-events:none;}
+  .tap-hint{position:absolute;bottom:-38px;left:50%;transform:translateX(-50%);font-size:0.8rem;color: var(--ink-soft);opacity:0.75;white-space:nowrap;animation: gentleFloat 3s ease-in-out infinite;}
+  .message-card{position:relative;max-width: 420px;width:90%;min-height: 90px;margin: 20px auto 10px;padding: 26px 30px;border-radius: 28px;background: var(--white-glass);backdrop-filter: blur(18px);-webkit-backdrop-filter: blur(18px);border: 1px solid rgba(255,255,255,0.6);box-shadow: 0 10px 40px rgba(255,143,192,0.25);display:flex;align-items:center;justify-content:center;opacity:0;transition: opacity 0.8s ease;}
+  .message-card.show{opacity:1;animation: gentleFloat 5s ease-in-out infinite;}
+  .message-text{font-size: clamp(1rem, 3.6vw, 1.2rem);font-weight:500;color: var(--ink);line-height:1.5;}
+  .progress-track{width: 220px;height:6px;border-radius:10px;background: rgba(255,255,255,0.5);margin: 30px auto 0;overflow:hidden;box-shadow: inset 0 1px 3px rgba(255,143,192,0.3);}
+  .progress-fill{height:100%;width:0%;border-radius:10px;background: linear-gradient(90deg, var(--pink-2), var(--pink-deep));transition: width 0.6s ease;}
+  .progress-label{margin-top:10px;font-size:0.78rem;color: var(--ink-soft);letter-spacing:0.5px;}
+  .float-heart{position:fixed;font-size: 22px;pointer-events:none;z-index:50;filter: drop-shadow(0 0 8px rgba(255,111,176,0.8));animation: floatUp 2.6s ease-out forwards;}
+  @keyframes floatUp{0%{ transform: translateY(0) scale(0.6) rotate(0deg); opacity:0; }10%{ opacity:1; }100%{ transform: translateY(-260px) scale(1.15) rotate(15deg); opacity:0; }}
+  .sparkle{position:fixed;pointer-events:none;z-index:49;color: #fff;font-size: 14px;animation: sparklePop 1s ease-out forwards;}
+  @keyframes sparklePop{0%{ transform: scale(0) rotate(0deg); opacity:1; }60%{ transform: scale(1.3) rotate(90deg); opacity:1;}100%{ transform: scale(0.4) rotate(180deg); opacity:0; }}
+  .bg-particle{position:fixed;pointer-events:none;z-index:1;opacity:0.55;animation-name: bgFloat;animation-timing-function: ease-in-out;animation-iteration-count: infinite;}
+  @keyframes bgFloat{0%{ transform: translateY(0) translateX(0) rotate(0deg); }50%{ transform: translateY(-40px) translateX(15px) rotate(10deg); }100%{ transform: translateY(0) translateX(0) rotate(0deg); }}
+  #final-screen{justify-content:center;padding: 60px 20px;}
+  .final-heart-stage{position:relative;width: 260px;height:260px;display:flex;align-items:center;justify-content:center;margin-bottom: 20px;}
+  .giant-heart{font-size: 130px;filter: drop-shadow(0 0 40px rgba(255,95,168,0.85)) drop-shadow(0 0 90px rgba(255,182,213,0.7));animation: heartFloat 3.4s ease-in-out infinite, heartPulse 2.4s ease-in-out infinite;opacity:0;transform: scale(0.3);transition: opacity 1.4s ease, transform 1.4s cubic-bezier(.2,.8,.2,1);}
+  .giant-heart.show{opacity:1;transform: scale(1);}
+  .final-ring{position:absolute;inset:0;border-radius:50%;border: 1px solid rgba(255,143,192,0.4);animation: ringPulse 3.2s ease-out infinite;}
+  .final-ring.d2{ animation-delay:1s; }
+  .final-ring.d3{ animation-delay:2s; }
+  .letter-card{max-width: 520px;width:92%;margin-top: 20px;padding: 40px 34px;border-radius: 32px;background: var(--white-glass-strong);backdrop-filter: blur(22px);-webkit-backdrop-filter: blur(22px);border: 1px solid rgba(255,255,255,0.7);box-shadow: 0 20px 60px rgba(255,143,192,0.35);min-height: 260px;}
+  .typewriter-text{font-size: clamp(1rem, 3.4vw, 1.2rem);line-height:1.9;color: var(--ink);font-weight:400;white-space: pre-wrap;text-align:left;}
+  .typewriter-text .signature{font-weight:700;font-style:italic;font-size:1.15em;color: var(--pink-deep);}
+  .cursor{display:inline-block;width: 2px;background: var(--pink-deep);margin-left:2px;animation: blink 0.8s step-end infinite;}
+  @keyframes blink{50%{ opacity:0; }}
+  .forever-line{margin-top: 46px;font-size: clamp(1rem, 3.4vw, 1.3rem);font-weight:600;letter-spacing:0.5px;color: var(--pink-deep);opacity:0;transform: translateY(14px);transition: opacity 1.4s ease, transform 1.4s ease;}
+  .forever-line.show{opacity:1;transform: translateY(0);animation: gentleFloat 5s ease-in-out infinite;}
+  .final-light{position:fixed;border-radius:50%;pointer-events:none;z-index:0;background: radial-gradient(circle, #fff, transparent 70%);animation: twinkle 2.4s ease-in-out infinite;}
+  @keyframes twinkle{0%,100%{ opacity:0.2; transform:scale(0.8);}50%{ opacity:1; transform:scale(1.2);}}
+  @media (max-width:480px){.moon{ width:140px; height:140px;}.moon-wrap{ width:180px; height:180px;}.hero-heart{ font-size:70px;}.letter-card{ padding:28px 22px;}}
+  @media (prefers-reduced-motion: reduce){*{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }}
+</style>
+</head>
+<body>
+
+<div class="glow-orb a"></div>
+<div class="glow-orb b"></div>
+<div class="glow-orb c"></div>
+<div id="ambient-canvas"></div>
+
+<section class="screen" id="opening-screen">
+  <div class="hero-heart-wrap">
+    <div class="hero-heart-ring"></div>
+    <div class="hero-heart-ring delay"></div>
+    <div class="hero-heart">💗</div>
+  </div>
+  <h1 class="title">To The Moon... And Back 💗</h1>
+  <p class="subtitle">Every heartbeat of mine has a place for you.</p>
+  <button class="glow-btn" id="start-btn">Touch My Heart 💗</button>
+</section>
+
+<section class="screen hidden-screen" id="main-screen">
+  <p class="moon-instructions">Tap the moon, and let a little love float free.</p>
+  <div class="moon-wrap" id="moon-wrap">
+    <div class="moon-glow-ring"></div>
+    <div class="moon-glow-ring" style="animation-delay:1.5s;"></div>
+    <div class="moon" id="moon"></div>
+    <span class="tap-hint" id="tap-hint">tap me 💗</span>
+  </div>
+  <div class="message-card" id="message-card">
+    <p class="message-text" id="message-text"></p>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-label" id="progress-label">0 / 15 taps</div>
+</section>
+
+<section class="screen hidden-screen" id="final-screen">
+  <div class="final-heart-stage">
+    <div class="final-ring"></div>
+    <div class="final-ring d2"></div>
+    <div class="final-ring d3"></div>
+    <div class="giant-heart" id="giant-heart">💗</div>
+  </div>
+  <div class="letter-card">
+    <p class="typewriter-text" id="typewriter-text"></p>
+  </div>
+  <p class="forever-line" id="forever-line">Forever starts with you.</p>
+</section>
+
+<script>
+(function(){
+  const openingScreen = document.getElementById('opening-screen');
+  const mainScreen = document.getElementById('main-screen');
+  const finalScreen = document.getElementById('final-screen');
+  const startBtn = document.getElementById('start-btn');
+  const moonWrap = document.getElementById('moon-wrap');
+  const moon = document.getElementById('moon');
+  const tapHint = document.getElementById('tap-hint');
+  const messageCard = document.getElementById('message-card');
+  const messageText = document.getElementById('message-text');
+  const progressFill = document.getElementById('progress-fill');
+  const progressLabel = document.getElementById('progress-label');
+  const ambientCanvas = document.getElementById('ambient-canvas');
+  const giantHeart = document.getElementById('giant-heart');
+  const typewriterText = document.getElementById('typewriter-text');
+  const foreverLine = document.getElementById('forever-line');
+
+  const messages = [
+    "💗 You are my favorite hello.",
+    "💗 My heart found its home in you.",
+    "💗 Loving you feels so natural.",
+    "💗 Every moment with you becomes a beautiful memory.",
+    "💗 You make my world softer.",
+    "💗 My safest place has always been your heart.",
+    "💗 You are every dream I never knew I had.",
+    "💗 Every version of my future has you in it.",
+    "💗 I still smile every time I see your name.",
+    "💗 Thank you for existing.",
+    "💗 You make ordinary days feel magical.",
+    "💗 I choose you, every single day.",
+    "💗 My heart will always recognize yours.",
+    "💗 You are the best thing that ever happened to me.",
+    "💗 Forever doesn't scare me if it's with you."
+  ];
+
+  let tapCount = 0;
+  const totalTaps = messages.length;
+  let busy = false;
+
+  function spawnAmbientParticles(){
+    const symbols = ['💗','✨','💕','⭐'];
+    const count = window.innerWidth < 480 ? 14 : 22;
+    for(let i=0;i<count;i++){
+      const el = document.createElement('div');
+      el.className = 'bg-particle';
+      el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+      const size = 10 + Math.random()*16;
+      el.style.fontSize = size + 'px';
+      el.style.left = Math.random()*100 + 'vw';
+      el.style.top = Math.random()*100 + 'vh';
+      const duration = 6 + Math.random()*8;
+      el.style.animationDuration = duration + 's';
+      el.style.animationDelay = (Math.random()*6) + 's';
+      el.style.opacity = 0.25 + Math.random()*0.35;
+      ambientCanvas.appendChild(el);
+    }
+  }
+  spawnAmbientParticles();
+
+  function showScreen(el){
+    [openingScreen, mainScreen, finalScreen].forEach(s => s.classList.add('hidden-screen'));
+    el.classList.remove('hidden-screen');
+  }
+
+  startBtn.addEventListener('click', () => {
+    showScreen(mainScreen);
+  });
+
+  function spawnFloatingHeart(x, y){
+    const heart = document.createElement('div');
+    heart.className = 'float-heart';
+    heart.textContent = '💗';
+    heart.style.left = (x - 10) + 'px';
+    heart.style.top = (y - 10) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2700);
+  }
+
+  function spawnSparkles(x, y){
+    const glyphs = ['✨','⭐','·'];
+    const count = 6;
+    for(let i=0;i<count;i++){
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+      const angle = (Math.PI * 2 * i)/count + Math.random()*0.5;
+      const dist = 30 + Math.random()*40;
+      const sx = x + Math.cos(angle)*dist;
+      const sy = y + Math.sin(angle)*dist;
+      s.style.left = sx + 'px';
+      s.style.top = sy + 'px';
+      s.style.animationDelay = (Math.random()*0.15) + 's';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 1200);
+    }
+  }
+
+  function increaseMoonGlow(){
+    const intensity = Math.min(tapCount / totalTaps, 1);
+    const glowSize = 40 + intensity * 60;
+    const glowSize2 = 90 + intensity * 90;
+    moon.style.boxShadow = `
+      0 0 ${glowSize}px ${10 + intensity*15}px rgba(255,143,192,${0.55 + intensity*0.35}),
+      0 0 ${glowSize2}px ${25 + intensity*20}px rgba(255,182,213,${0.45 + intensity*0.3}),
+      inset -10px -10px 30px rgba(255,120,180,0.35),
+      inset 10px 10px 25px rgba(255,255,255,0.6)`;
+  }
+
+  function showMessage(text){
+    messageCard.classList.remove('show');
+    setTimeout(() => {
+      messageText.textContent = text;
+      messageCard.classList.add('show');
+    }, 250);
+  }
+
+  moonWrap.addEventListener('click', (e) => {
+    if(busy) return;
+    if(tapCount >= totalTaps) return;
+
+    const rect = moon.getBoundingClientRect();
+    const cx = rect.left + rect.width/2;
+    const cy = rect.top + rect.height/2;
+
+    spawnFloatingHeart(cx, cy);
+    spawnSparkles(cx, cy);
+    increaseMoonGlow();
+
+    tapHint.style.display = 'none';
+
+    showMessage(messages[tapCount]);
+    tapCount++;
+
+    progressFill.style.width = (tapCount/totalTaps*100) + '%';
+    progressLabel.textContent = `${tapCount} / ${totalTaps} taps`;
+
+    if(tapCount >= totalTaps){
+      busy = true;
+      setTimeout(() => {
+        beginFinale();
+      }, 2600);
+    }
+  });
+
+  function beginFinale(){
+    showScreen(finalScreen);
+    spawnFinalLights();
+    setTimeout(() => { giantHeart.classList.add('show'); }, 400);
+    setTimeout(() => { startTypewriter(); }, 1600);
+  }
+
+  function spawnFinalLights(){
+    const count = window.innerWidth < 480 ? 20 : 34;
+    for(let i=0;i<count;i++){
+      const light = document.createElement('div');
+      light.className = 'final-light';
+      const size = 2 + Math.random()*4;
+      light.style.width = size + 'px';
+      light.style.height = size + 'px';
+      light.style.left = Math.random()*100 + 'vw';
+      light.style.top = Math.random()*100 + 'vh';
+      light.style.animationDelay = (Math.random()*2.4) + 's';
+      light.style.animationDuration = (1.6 + Math.random()*2) + 's';
+      document.body.appendChild(light);
+    }
+  }
+
+  const letterLines = [
+    "No matter how many words I write...",
+    "they will never be enough.",
+    "",
+    "No matter how many hearts fill this screen...",
+    "none of them could ever hold all the love I have for you.",
+    "",
+    "You are my peace.",
+    "My favorite person.",
+    "My home.",
+    "",
+    "I love you, Nora. 💗"
+  ];
+
+  function startTypewriter(){
+    const fullText = letterLines.join('\n');
+    let idx = 0;
+    typewriterText.innerHTML = '';
+    const cursorSpan = document.createElement('span');
+    cursorSpan.className = 'cursor';
+    cursorSpan.textContent = '\u00A0';
+
+    function typeNext(){
+      if(idx <= fullText.length){
+        const shown = fullText.slice(0, idx);
+        typewriterText.innerHTML = escapeHtml(shown).replace(
+          /I love you, Nora\. 💗/,
+          '<span class="signature">I love you, Nora. 💗</span>'
+        );
+        typewriterText.appendChild(cursorSpan);
+        idx++;
+        const char = fullText[idx-1];
+        const delay = char === '\n' ? 380 : (char === '.' ? 180 : 34);
+        setTimeout(typeNext, delay);
+      } else {
+        cursorSpan.remove();
+        setTimeout(() => { foreverLine.classList.add('show'); }, 600);
+      }
+    }
+    typeNext();
+  }
+
+  function escapeHtml(str){
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+})();
+</script>
+</body>
+</html>
